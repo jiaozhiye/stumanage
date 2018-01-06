@@ -1,0 +1,15 @@
+{
+  "presets": [
+    ["es2015", {"modules": false}]
+  ],
+  "plugins": [
+    "syntax-dynamic-import",
+    "transform-object-rest-spread",
+    ["component", [
+      {
+        "libraryName": "element-ui",
+        "styleLibraryName": "theme-chalk"
+      }
+    ]]
+  ]
+}
