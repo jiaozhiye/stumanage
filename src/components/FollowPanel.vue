@@ -286,6 +286,12 @@ export default {
                     message: '必须选择联系类型!'
                 })
             }
+            if (this.followTextVal == ''){
+                return _this.$message({
+                    type: 'error',
+                    message: '必须输入跟踪内容!'
+                })
+            }
 
             this.$http.post('/safe/track/save', {
                 std_id: _this.params.itemId,
@@ -298,7 +304,8 @@ export default {
                 // console.log(response.data)
                 if (response.data.code == 1){
                     response.data.result.isEdit = !1
-                    _this.followList.unshift(response.data.result) 
+                    _this.followList.unshift(response.data.result)
+                    _this.followTextVal = ''
                 } else {
                     _this.$message({
                         type: 'error',
@@ -410,8 +417,13 @@ export default {
             this.dialogVisible = !1
         },
         submitRemindHandle(){
-            this.dialogVisible = !1
             const _this = this
+            if (this.remind.lxtext == ''){
+                return _this.$message({
+                    type: 'error',
+                    message: '必须输入联系提醒内容!'
+                })
+            }
             this.$http.post('/safe/remind/updateById', {
                 id: _this.remind.id,
                 remind_date: _this.remind.lxdate,
@@ -420,6 +432,7 @@ export default {
             })
             .then(function (response){
                 if (response.data.code == 1){
+                    _this.dialogVisible = !1
                     // 重新加载提醒数据
                     _this.getRemindList()
                     _this.$message({

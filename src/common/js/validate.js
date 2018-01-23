@@ -15,7 +15,7 @@ Vue.use(VeeValidate, {locale: 'zh_CN'})
 const dictionary = {
     zh_CN: {
        messages: {
-         required: (field)=> field + '不能为空.'
+         required: field => field + '不能为空.'
        },
        attributes:{
          account: '账号',
@@ -31,7 +31,9 @@ const dictionary = {
          studesc: '学生扩展描述',
          dataname: '数据名称',
          order: '排序值',
-         postname: '职务名称'
+         postname: '职务名称',
+         classname: '班级名称',
+         arctitle: '文章标题'
        }
    }
 }

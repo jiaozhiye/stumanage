@@ -1,5 +1,5 @@
 <template>
-<div class="add-employ-panel">
+<div class="app-form-panel">
     <div class="app-form-item">
         <label class="app-form-label"><i>*</i>登录帐号</label>
         <div class="app-input-block">
@@ -189,7 +189,4 @@ export default {
 </script>
 
 <style>
-.add-employ-panel {
-    padding: 30px 40px 20px 20px;
-}
 </style>

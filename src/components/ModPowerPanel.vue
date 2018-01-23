@@ -1,5 +1,5 @@
 <template>
-<div class="add-dept-panel power-panel">
+<div class="app-form-panel power-panel">
     <div class="app-form-item">
         <label class="app-form-label"><i>*</i>职务名称</label>
         <div class="app-input-block">
@@ -98,7 +98,4 @@ export default {
 </script>
 
 <style>
-.add-dept-panel {
-    padding: 30px 40px 20px 20px;
-}
 </style>

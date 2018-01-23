@@ -30,6 +30,9 @@ export default {
     },
     watch: {
         getPersonalInfo(){
+            if (typeof this.getPersonalInfo.name == 'undefined'){
+                return
+            }
             if (this.getPersonalInfo.name.length <= 3){ // 中文昵称
                 this.userName = this.getPersonalInfo.name.slice(1)
             } else {

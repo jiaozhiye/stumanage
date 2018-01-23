@@ -48,7 +48,6 @@ export default {
             })
         },
         createHighchar(){
-            console.log(7)
             const _this = this
             this.chart = Highcharts.chart('my-convers', {
                 credits:{

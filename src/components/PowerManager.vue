@@ -10,8 +10,12 @@
             <el-table-column prop="staffs" label="人员"></el-table-column>
             <el-table-column label="操作" width="200">
                 <template slot-scope="scope">
-                    <el-button @click.stop="modItemHandle(scope.row.id)" type="text">修改</el-button>
-                    <el-button @click.stop="delItemHandle(scope.row.id)" type="text">删除</el-button>
+                    <el-button @click.stop="modItemHandle(scope.row.id)" type="text">
+                        <i class="el-icon-edit"></i> 修改
+                    </el-button>
+                    <el-button @click.stop="delItemHandle(scope.row.id)" type="text">
+                        <i class="el-icon-delete"></i> 删除
+                    </el-button>
                 </template>
             </el-table-column>
         </el-table>

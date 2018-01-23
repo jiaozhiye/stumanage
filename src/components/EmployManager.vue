@@ -34,8 +34,12 @@
             <el-table-column prop="phone" label="手机"></el-table-column>
             <el-table-column label="操作" width="250">
                 <template slot-scope="scope">
-                    <el-button @click.stop="modItemHandle(scope.row.id)" type="text">修改</el-button>
-                    <el-button @click.stop="delItemHandle(scope.row.id)" type="text">离职</el-button>
+                    <el-button @click.stop="modItemHandle(scope.row.id)" type="text">
+                        <i class="el-icon-edit"></i> 修改
+                    </el-button>
+                    <el-button @click.stop="delItemHandle(scope.row.id)" type="text">
+                        <i class="el-icon-delete"></i> 离职
+                    </el-button>
                 </template>
             </el-table-column>
         </el-table>

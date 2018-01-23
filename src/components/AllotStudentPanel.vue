@@ -1,5 +1,5 @@
 <template>
-<div class="add-student-panel">
+<div class="app-form-panel">
     <h4 class="form-group-apart"><i class="icon el-icon-edit-outline"></i>学员的分配</h4>
     <div class="app-form-item">
         <label class="app-form-label"><i>*</i>所有者</label>
@@ -112,7 +112,4 @@ export default {
 </script>
 
 <style>
-.add-student-panel {
-    padding: 30px 40px 20px 20px;
-}
 </style>

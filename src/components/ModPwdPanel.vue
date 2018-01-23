@@ -1,5 +1,5 @@
 <template>
-<div class="mod-pwd-panel">
+<div class="app-form-panel">
     <div class="app-form-item">
         <label class="app-form-label">当前密码</label>
         <div class="app-input-block">
@@ -99,7 +99,4 @@ export default {
 </script>
 
 <style>
-.mod-pwd-panel {
-    padding: 30px 40px 20px 20px;
-}
 </style>

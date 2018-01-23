@@ -1,5 +1,5 @@
 <template>
-<div class="add-student-panel">
+<div class="app-form-panel">
     <h4 class="form-group-apart"><i class="icon el-icon-edit-outline"></i>学员基本信息</h4>
     <div class="app-form-item">
         <label class="app-form-label"><i>*</i>学员姓名</label>
@@ -335,11 +335,7 @@ export default {
 </script>
 
 <style>
-.add-student-panel {
-    padding: 30px 40px 20px 20px;
-}
-
-.add-student-panel .label-wrapper .label-add {
+.app-form-panel .label-wrapper .label-add {
     margin: 0;
 }
 </style>

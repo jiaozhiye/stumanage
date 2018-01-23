@@ -1,5 +1,5 @@
 <template>
-<div class="add-dept-panel">
+<div class="app-form-panel">
     <div class="app-form-item">
         <label class="app-form-label"><i>*</i>上级部门</label>
         <div class="app-input-block">
@@ -103,7 +103,4 @@ export default {
 </script>
 
 <style>
-.add-dept-panel {
-    padding: 30px 40px 20px 20px;
-}
 </style>

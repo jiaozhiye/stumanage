@@ -1,23 +1,16 @@
 <template>
 <div class="app-form-panel">
     <div class="app-form-item">
-        <label class="app-form-label"><i>*</i>字典名称</label>
+        <label class="app-form-label"><i>*</i>班级名称</label>
         <div class="app-input-block">
-            <el-input name="dataname" v-model="form.title" v-validate="'required|spechar'" :class="{'formDanger': errors.has('dataname')}" clearable placeholder="请输入字典名称..." ></el-input>
-            <span v-if="errors.has('dataname')" class="prompt-title">{{ errors.first('dataname') }}</span>
+            <el-input name="classname" v-model="form.title" v-validate="'required|spechar'" :class="{'formDanger': errors.has('classname')}" clearable placeholder="请输入班级名称..." ></el-input>
+            <span v-if="errors.has('classname')" class="prompt-title">{{ errors.first('classname') }}</span>
         </div>
     </div>
     <div class="app-form-item">
-        <label class="app-form-label">字典值</label>
+        <label class="app-form-label">班级描述</label>
         <div class="app-input-block">
-            <el-input v-model="form.value" clearable placeholder="请输入字典值..." ></el-input>
-        </div>
-    </div>
-    <div class="app-form-item">
-        <label class="app-form-label"><i>*</i>字典排序</label>
-        <div class="app-input-block">
-            <el-input name="order" v-model="form.number" v-validate="'required|numeric'" :class="{'formDanger': errors.has('order')}" clearable placeholder="请输入排序值..." ></el-input>
-            <span v-if="errors.has('order')" class="prompt-title">{{ errors.first('order') }}</span>
+            <el-input :rows="5" v-model="form.desc" placeholder="请输入班级描述..." type="textarea"></el-input>
         </div>
     </div>
     <div class="app-form-item tr">
@@ -29,7 +22,7 @@
 
 <script>
 export default {
-    name: 'AddDictPanel',
+    name: 'AddClassPanel',
     props: {
         params: Object
     },
@@ -37,42 +30,37 @@ export default {
         return {
             form: {
                 title: '',
-                value: '',
-                number: ''
+                desc: ''
             }
         }
     },
     methods: {
         submitHandle(){
             const _this = this   
-            this.insertDataInfo(function(){
+            this.insertClassInfo(function(){
                 _this.$emit('reloadEvent', 'reload')
                 _this.closePanelHandle()
             })
         },
-        insertDataInfo(callback){
+        insertClassInfo(callback){
             const _this = this
 
             if (this.form.title == ''){
                 return this.$message({
-                    message: '请正确填写字典名称再提交！',
+                    message: '请正确填写班级名称再提交！',
                     type: 'warning'
                 })
             }
             
-            this.$http.get('/safe/dictMgr/add', {
-                params: {
-                    pid: _this.params.dictType,
-                    name: _this.form.title,
-                    value: _this.form.value,
-                    sort: _this.form.number
-                }
+            this.$http.post('/safe/class/add', {
+                name: _this.form.title,
+                remark: _this.form.desc
             })
             .then(function (response){
                 if (response.data.code == 1){
                     _this.$message({
                         type: 'success',
-                        message: '字典添加成功!'
+                        message: '班级添加成功!'
                     })
                     callback && callback()
                 } else {

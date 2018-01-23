@@ -47,11 +47,18 @@ export default {
       })
       .then(function (response){
         // console.log(response.data)
-        _this.perInfo.id = response.data.id
-        _this.perInfo.name = response.data.name
-        _this.perInfo.deptId = response.data.deptId
-        _this.perInfo.type = response.data.type // 0 -> 普通员工    1 -> 部门经理    2 -> 管理员
-        callback && callback()
+        if (response.data.code == 1){
+          _this.perInfo.id = response.data.id
+          _this.perInfo.name = response.data.name
+          _this.perInfo.deptId = response.data.deptId
+          _this.perInfo.type = response.data.type // 0 -> 普通员工    1 -> 部门经理    2 -> 管理员
+          callback && callback()
+        } else {
+          _this.$message({
+              type: 'error',
+              message: response.data.message
+          })
+        }
       })
       .catch(function (error){
           console.log(error)
@@ -139,6 +146,9 @@ export default {
 /**
  * form box style
  */
+.app-form-panel {
+    padding: 30px 40px 20px 20px;
+}
 .app-form-item {
   margin-bottom: 15px;
   clear: both;

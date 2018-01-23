@@ -1,6 +1,6 @@
 <template>
-<div class="deptManager-wrapper">
-    <div class="dept-top">
+<div class="dictManager-wrapper">
+    <div class="dict-top">
         <el-select v-model="dictType" @change="changeHandle" class="dictSelect fl">
             <el-option
             v-for="item in dictList"
@@ -11,14 +11,18 @@
         </el-select>
         <el-button class="fl" @click.stop="addDataHandle">新增字典</el-button>
     </div>
-    <div class="dept-list">
+    <div class="dict-list">
         <el-table :data="list" border style="width: 100%" v-loading="loading">
             <el-table-column prop="name" label="字典名称"></el-table-column>
             <el-table-column prop="sort" label="排序" sortable></el-table-column>
             <el-table-column label="操作" width="200">
                 <template slot-scope="scope">
-                    <el-button @click.stop="modItemHandle(scope.row.id)" type="text">修改</el-button>
-                    <el-button @click.stop="delItemHandle(scope.row.id)" type="text">删除</el-button>
+                    <el-button @click.stop="modItemHandle(scope.row.id)" type="text">
+                        <i class="el-icon-edit"></i> 修改
+                    </el-button>
+                    <el-button @click.stop="delItemHandle(scope.row.id)" type="text">
+                        <i class="el-icon-delete"></i> 删除
+                    </el-button>
                 </template>
             </el-table-column>
         </el-table>
@@ -150,22 +154,22 @@ export default {
 </script>
 
 <style>
-.deptManager-wrapper {}
-.dept-top {
+.dictManager-wrapper {}
+.dict-top {
     height: 40px;
 }
-.dept-top .dictSelect {
+.dict-top .dictSelect {
     width: 120px;
     margin-right: 10px;
 }
 
-.dept-list {
+.dict-list {
     margin-top: 20px;
 }
-.dept-list .el-table__body-wrapper {
+.dict-list .el-table__body-wrapper {
     overflow-x: hidden;
 }
-.dept-list .el-table__body td {
+.dict-list .el-table__body td {
     padding: 5px 0;
 }
 </style>

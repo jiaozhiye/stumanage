@@ -62,7 +62,12 @@ export default {
             }
         },
         addLabelHandle(val){
-            if (this.labelList.indexOf(this.tagname) != -1){
+            if (this.tagname == ''){
+                return this.$message({
+                    message: '请输入标签内容，不能添加空标签！',
+                    type: 'warning'
+                })
+            } else if (this.labelList.indexOf(this.tagname) != -1){
                 return this.$message({
                     message: '此标签已经添加过了，不能重复添加！',
                     type: 'warning'

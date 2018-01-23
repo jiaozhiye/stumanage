@@ -1,46 +1,76 @@
 <template>
-    <el-menu :default-active="defaultSelected" :router="true" class="el-menu-vertical-demo app-sidebar" background-color="#273240" text-color="#fff" active-text-color="#ffd04b">
-      <el-submenu v-for="(val, key) in list" :index="(key + 1).toString()">
-        <template slot="title">
-          <i :class="val.iconName"></i>
-          <span>{{ val.title }}</span>
-        </template>
-        <el-menu-item v-for="(item, index) in val.list" :index="item.link">
-          {{ item.title }}
-        </el-menu-item>
-      </el-submenu>
-    </el-menu>
+    <el-menu :router="true" 
+        :default-active="defaultSelected" 
+        :default-openeds="[parentDepth]" 
+        class="el-menu-vertical-demo app-sidebar" 
+        background-color="#273240" 
+        text-color="#fff" 
+        active-text-color="#ffd04b">
+            <el-submenu v-for="(val, key) in list" :index="val.depth">
+                <template slot="title">
+                    <i :class="val.iconName"></i>
+                    <span>{{ val.title }}</span>
+                </template>
+                <el-menu-item v-for="(item, index) in val.list" :index="item.link">
+                    {{ item.title }}
+                </el-menu-item>
+            </el-submenu>
+        </el-menu>
 </template>
 
 <script>
+import {getLocationHash} from 'common/js/tools'
+
 export default {
     name: 'Sidebar',
     data(){
         return {
             list: [],
             iconArr: ['menu', 'location', 'share', 'message', 'setting'],
-            defaultSelected: 'home'
+            defaultSelected: '',
+            parentDepth: ''
         }
     },
     created(){
-        this.getMenuList()
+        this.defaultSelected = getLocationHash()
+        this.getMenuList((arr) => {
+            this.list = arr
+            for (let i = 0; i < this.list.length; i++){
+                this.list[i].iconName = 'el-icon-' + this.iconArr[i]
+            }
+            this.iterFunc(this.list, '')
+            this.findParDepth(this.list, this.defaultSelected)
+        })
     },
     methods: {
-        getMenuList(){
+        getMenuList(callback){
             const _this = this
             this.$http.get('/safe/sys/menu', {
                 params: {}
             })
             .then(function (response){
                 // console.log(response.data.list)
-                for (let i = 0; i < response.data.list.length; i++){
-                    response.data.list[i].iconName = 'el-icon-' + _this.iconArr[i]
+                callback && callback(response.data.list)
+            })
+        },
+        iterFunc(arr, str){
+            for (let i = 0; i < arr.length; i++){
+                arr[i].depth = str + i
+                if (_.isArray(arr[i].list)){
+                    this.iterFunc(arr[i].list, arr[i].depth + '-')
                 }
-                _this.list = response.data.list
-            })
-            .catch(function (error){
-                console.log(error)
-            })
+            }
+        },
+        findParDepth(arr, str){
+            for (let i = 0; i < arr.length; i++){
+                if (arr[i].link === str){
+                    this.parentDepth = arr[i].depth.slice(0, -2)
+                } else {
+                    if (_.isArray(arr[i].list)){
+                        this.findParDepth(arr[i].list, str)
+                    }
+                }
+            }
         }
     }
 }

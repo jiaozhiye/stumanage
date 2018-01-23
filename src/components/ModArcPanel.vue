@@ -1,24 +1,18 @@
 <template>
-<div class="app-form-panel">
+<div class="add-arc-panel">
     <div class="app-form-item">
-        <label class="app-form-label"><i>*</i>字典名称</label>
+        <label class="app-form-label">文章标题</label>
         <div class="app-input-block">
-            <el-input name="dataname" v-model="form.title" v-validate="'required|spechar'" :class="{'formDanger': errors.has('dataname')}" clearable placeholder="请输入字典名称..." ></el-input>
-            <span v-if="errors.has('dataname')" class="prompt-title">{{ errors.first('dataname') }}</span>
+            <el-input name="arctitle" v-model="title" v-validate="'required|spechar'" :class="{'formDanger': errors.has('arctitle')}" clearable placeholder="请输入文章标题..." ></el-input>
+            <span v-if="errors.has('arctitle')" class="prompt-title">{{ errors.first('arctitle') }}</span>
         </div>
     </div>
-    <div class="app-form-item">
-        <label class="app-form-label">字典值</label>
-        <div class="app-input-block">
-            <el-input v-model="form.value" clearable placeholder="请输入字典值..." ></el-input>
-        </div>
-    </div>
-    <div class="app-form-item">
-        <label class="app-form-label"><i>*</i>字典排序</label>
-        <div class="app-input-block">
-            <el-input name="order" v-model="form.number" v-validate="'required|numeric'" :class="{'formDanger': errors.has('order')}" clearable placeholder="请输入排序值..." ></el-input>
-            <span v-if="errors.has('order')" class="prompt-title">{{ errors.first('order') }}</span>
-        </div>
+    <div class="arc-editor">
+        <quill-editor
+            v-model="content"
+            ref="myQuillEditor"
+            :options="editorOption">
+        </quill-editor>
     </div>
     <div class="app-form-item tr">
         <el-button @click.stop="closePanelHandle">取消</el-button>
@@ -28,23 +22,43 @@
 </template>
 
 <script>
+import 'quill/dist/quill.core.css'
+import 'quill/dist/quill.snow.css'
+import 'quill/dist/quill.bubble.css'
+
+import {quillEditor} from 'vue-quill-editor'
+import {quillRedefine} from 'vue-quill-editor-upload'
+
 export default {
-    name: 'ModDictPanel',
+    name: 'ModArcPanel',
     props: {
         params: Object
     },
     data(){
         return {
             itemId: this.params.itemId,
-            form: {
-                title: '',
-                value: '',
-                number: ''
-            }
+            title: '',
+            content: '',
+            editorOption: {}
         }
     },
-    created(){
+    created (){
         this.getItemInfo()
+        this.editorOption = quillRedefine({
+            // 图片上传的设置
+            uploadConfig: {
+                action: 'http://127.0.0.1:2080/upload/do',  // 图片上传地址
+                res: (respnse) => {
+                    console.log(respnse)
+                    return respnse.filePath
+                }
+            }
+        })
+    },
+    computed: {
+        editor(){
+            return this.$refs.myQuillEditor.quill
+        }
     },
     methods: {
         getItemInfo(){
@@ -56,9 +70,8 @@ export default {
             })
             .then(function (response){
                 // console.log(response.data)
-                _this.form.title = response.data.name
-                _this.form.value = response.data.value || ''
-                _this.form.number = response.data.sort
+                _this.title = response.data.name
+                _this.content = response.data.value || ''
             })
         },
         submitHandle(){
@@ -73,17 +86,15 @@ export default {
             this.$http.get('/safe/dictMgr/updateById', {
                 params: {
                     id: _this.itemId,
-                    pid: _this.params.dictType,
-                    name: _this.form.title,
-                    value: _this.form.value,
-                    sort: _this.form.number
+                    name: _this.title,
+                    content: _this.content
                 }
             })
             .then(function (response){
                 if (response.data.code == 1){
                     _this.$message({
                         type: 'success',
-                        message: '字典修改成功!'
+                        message: '文章修改成功!'
                     })
                     callback && callback()
                 } else {
@@ -97,9 +108,24 @@ export default {
         closePanelHandle(){
             this.params.isPlay = false
         }
+    },
+    components: {
+        quillEditor,
+        quillRedefine
     }
 }
 </script>
 
 <style>
+.add-arc-panel {
+    padding: 30px 20px 20px 20px;
+}
+.arc-editor .quill-editor {
+    background: #fff;
+    margin-bottom: 15px;
+    clear: both;
+}
+.arc-editor .ql-container {
+    min-height: 400px;
+}
 </style>

@@ -20,7 +20,7 @@
             </el-pagination>
         </div>
     </div>
-    <div class="welcome-box">
+    <!-- <div class="welcome-box">
         <h4 class="title">跟踪提醒</h4>
         <div class="content">
             <div class="box-card">
@@ -44,7 +44,7 @@
                 @current-change="handleCurrentChangeFollow">
             </el-pagination>
         </div>
-    </div>
+    </div> -->
     <div class="welcome-box">
         <h4 class="title">数据概览</h4>
         <div class="content count-wrapper">
@@ -131,7 +131,7 @@ export default {
     },
     created(){
         this.getMsgList(1)
-        this.getFollowList(1)
+        // this.getFollowList(1)
     },
     components: {
         MyStudentCount,

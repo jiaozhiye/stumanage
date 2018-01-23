@@ -12,6 +12,8 @@
 // import LogManager from 'components/LogManager.vue'
 // import DictManager from 'components/DictManager.vue'
 // import PowerManager from 'components/PowerManager.vue'
+// import ClassManager from 'components/ClassManager.vue'
+// import ArticleManager from 'components/ArticleManager.vue'
 
 const Home = () => import('components/Home.vue')
 const DeptManager = () => import('components/DeptManager.vue')
@@ -27,6 +29,8 @@ const PersonalSetting = () => import('components/PersonalSetting.vue')
 const LogManager = () => import('components/LogManager.vue')
 const DictManager = () => import('components/DictManager.vue')
 const PowerManager = () => import('components/PowerManager.vue')
+const ClassManager = () => import('components/ClassManager.vue')
+const ArticleManager = () => import('components/ArticleManager.vue')
 
 const routes = {
     routes: [
@@ -85,6 +89,14 @@ const routes = {
         {
             path: '/jobMgr',
             component: PowerManager
+        },
+        {
+            path: '/classManager',
+            component: ClassManager
+        },
+        {
+            path: '/arcManager',
+            component: ArticleManager
         },
         {
             path: '*',
