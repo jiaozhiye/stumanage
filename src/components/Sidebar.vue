@@ -26,7 +26,7 @@ export default {
     data(){
         return {
             list: [],
-            iconArr: ['menu', 'location', 'share', 'message', 'setting'],
+            iconArr: ['menu', 'location', 'share', 'tickets', 'setting'],
             defaultSelected: '',
             parentDepth: ''
         }

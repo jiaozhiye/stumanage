@@ -153,18 +153,16 @@ export default {
         updateDeptInfo(callback){
             const _this = this
             
-            this.$http.get('/safe/staff/updateById', {
-                params: {
-                    id: _this.itemId,
-                    username: _this.form.account,
-                    password: _this.form.password,
-                    name: _this.form.name,
-                    gender: _this.form.sex,
-                    phone: _this.form.phone,
-                    email: _this.form.email,
-                    dept: _this.form.deptId,
-                    job: _this.form.jobId
-                }
+            this.$http.post('/safe/staff/updateById', {
+                id: _this.itemId,
+                username: _this.form.account,
+                password: _this.form.password,
+                name: _this.form.name,
+                gender: _this.form.sex,
+                phone: _this.form.phone,
+                email: _this.form.email,
+                dept: _this.form.deptId,
+                job: _this.form.jobId
             })
             .then(function (response){
                 if (response.data.id){

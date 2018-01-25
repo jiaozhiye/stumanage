@@ -15,7 +15,7 @@
 			window.serverUrl = '/api';
 			return 'production';
 		} else if (env == 'development'){
-			window.serverUrl = 'http://192.168.1.105:8081/api';
+			window.serverUrl = 'http://192.168.1.163:8081/api';
 			return 'development';
 		} else {
 			return enviroment('production');

@@ -282,13 +282,13 @@ export default {
             
             if (this.contact.type == ''){
                 return _this.$message({
-                    type: 'error',
+                    type: 'warning',
                     message: '必须选择联系类型!'
                 })
             }
             if (this.followTextVal == ''){
                 return _this.$message({
-                    type: 'error',
+                    type: 'warning',
                     message: '必须输入跟踪内容!'
                 })
             }
@@ -420,7 +420,7 @@ export default {
             const _this = this
             if (this.remind.lxtext == ''){
                 return _this.$message({
-                    type: 'error',
+                    type: 'warning',
                     message: '必须输入联系提醒内容!'
                 })
             }

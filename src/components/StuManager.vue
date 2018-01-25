@@ -344,6 +344,11 @@ export default {
                 _url = '/safe/student/adminQuery'
             }
 
+            // 部门学员 的接口地址
+            if (this.hashSite == 'saleDeptStudents'){
+                _url = '/safe/student/mgrQuery'
+            }
+
             this.loading = !0
             
             this.$http.get(_url, {

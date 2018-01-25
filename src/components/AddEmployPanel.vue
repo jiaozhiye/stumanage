@@ -139,17 +139,15 @@ export default {
                 })
             }
             
-            this.$http.get('/safe/staff/add', {
-                params: {
-                    username: _this.form.account,
-                    password: _this.form.password,
-                    name: _this.form.name,
-                    gender: _this.form.sex,
-                    phone: _this.form.phone,
-                    email: _this.form.email,
-                    dept: _this.form.deptId,
-                    job: _this.form.jobId
-                }
+            this.$http.post('/safe/staff/add', {
+                username: _this.form.account,
+                password: _this.form.password,
+                name: _this.form.name,
+                gender: _this.form.sex,
+                phone: _this.form.phone,
+                email: _this.form.email,
+                dept: _this.form.deptId,
+                job: _this.form.jobId
             })
             .then(function (response){
                 // console.log(response.data)

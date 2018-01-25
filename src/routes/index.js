@@ -22,6 +22,7 @@ const FieldSet = () => import('components/FieldSet.vue')
 const StuManager = () => import('components/StuManager.vue?_=nocare')
 const FollowStuManager = () => import('components/StuManager.vue?_=follow')
 const StuPoolManager = () => import('components/StuManager.vue?_=pool')
+const StuDeptManager = () => import('components/StuManager.vue?_=dept')
 const CountManager = () => import('components/CountManager.vue')
 const MyConverManager = () => import('components/MyConverManager.vue')
 const ConverManager = () => import('components/ConverManager.vue')
@@ -59,6 +60,10 @@ const routes = {
             component: FollowStuManager
         },
         {
+            path: '/saleDeptStudents',
+            component: StuDeptManager
+        },
+        {
             path: '/studentPool',
             component: StuPoolManager
         },
@@ -91,7 +96,7 @@ const routes = {
             component: PowerManager
         },
         {
-            path: '/classManager',
+            path: '/classMgr',
             component: ClassManager
         },
         {

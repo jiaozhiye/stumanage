@@ -2,7 +2,7 @@
 <div class="classManager-wrapper">
     <div class="class-top">
         <el-button class="fl" @click.stop="addClassHandle">新增班级</el-button>
-        <div class="fr class-top-tit">{{ classInfo }}</div>
+        <div class="fr class-top-tit"><i class="el-icon-document"></i> {{ classInfo }}</div>
     </div>
     <div class="class-list">
         <el-table :data="list" border style="width: 100%" v-loading="loading">
@@ -187,6 +187,8 @@ export default {
 .class-top .class-top-tit {
     line-height: 40px;
     padding-right: 10px;
+    color: #409eff;
+    font-size: 16px;
 }
 
 .class-list {
