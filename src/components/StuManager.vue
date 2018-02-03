@@ -53,11 +53,12 @@
                     <span>{{ scope.row.phone }}</span>
                 </el-tooltip>
             </el-table-column>
-            <el-table-column prop="status_name" label="状态" width="100" sortable></el-table-column>
-            <el-table-column prop="source_name" label="来源" width="100"></el-table-column>
             <el-table-column prop="school_name" label="学校" width="200"></el-table-column>
             <el-table-column prop="speciality_name" label="专业" width="200"></el-table-column>
             <el-table-column prop="school_year" label="入学时间" width="120" sortable></el-table-column>
+            <el-table-column prop="class" label="班级" width="100"></el-table-column>
+            <el-table-column prop="status_name" label="状态" width="100" sortable></el-table-column>
+            <el-table-column prop="source_name" label="来源" width="100"></el-table-column>
             <el-table-column prop="owner_name" label="所有者" width="120"></el-table-column>
             <el-table-column label="标签" width="400">
                 <template slot-scope="scope">
@@ -356,9 +357,15 @@ export default {
             })
             .then(function (response){
                 // console.log(response.data.list)
+                if (response.data.code == -1){
+                    _this.$message({
+                        type: 'error',
+                        message: response.data.message
+                    })
+                }
+                _this.list = response.data.list || []
+                _this.list.total = response.data.totalRow || 0
                 _this.loading = !1
-                _this.list = response.data.list
-                _this.list.total = response.data.totalRow
                 callback && callback()
             })
             .catch(function (error){
@@ -465,7 +472,7 @@ export default {
     width: 220px;
 }
 .student-top > ul > .el-select:nth-of-type(1) {
-    width: 120px;
+    width: 140px;
     margin-right: 10px;
 }
 .student-top > ul > .el-select:nth-of-type(2) {
